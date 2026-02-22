@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Offline Mermaid Editor</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="theme-default">
+    <header class="toolbar">
+        <div class="toolbar-left">
+            <button id="btn-toggle-history" class="btn btn-icon" title="Toggle History">🗂️</button>
+            <h1 class="app-title">Mermaid Editor</h1>
+        </div>
+        <div class="toolbar-center">
+            <label for="theme-select">Theme:</label>
+            <select id="theme-select">
+                <option value="default">Default</option>
+                <option value="dark">Dark</option>
+                <option value="forest">Forest</option>
+                <option value="neutral">Neutral</option>
+                <option value="base">Base</option>
+            </select>
+            <div class="divider"></div>
+            <label>Sample:</label>
+            <div class="sample-buttons" id="sample-buttons">
+                <button class="btn btn-sample" data-sample="flowchart">Flowchart</button>
+                <button class="btn btn-sample" data-sample="sequence">Sequence</button>
+                <button class="btn btn-sample" data-sample="gantt">Gantt</button>
+                <button class="btn btn-sample" data-sample="class">Class</button>
+                <button class="btn btn-sample" data-sample="state">State</button>
+                <button class="btn btn-sample" data-sample="pie">Pie</button>
+                <button class="btn btn-sample" data-sample="journey">Journey</button>
+                <button class="btn btn-sample" data-sample="er">ER</button>
+                <button class="btn btn-sample" data-sample="git">Git</button>
+                <button class="btn btn-sample" data-sample="requirement">Req</button>
+                <button class="btn btn-sample" data-sample="mindmap">Mindmap</button>
+                <button class="btn btn-sample" data-sample="timeline">Timeline</button>
+                <button class="btn btn-sample" data-sample="sankey">Sankey</button>
+                <button class="btn btn-sample" data-sample="quadrant">Quadrant</button>
+            </div>
+        </div>
+        <div class="toolbar-right">
+            <button id="btn-open" class="btn" title="Open .mmd file">📂 Open</button>
+            <button id="btn-save" class="btn" title="Save .mmd file">💾 Save</button>
+            <div class="divider"></div>
+            <button id="btn-export-svg" class="btn btn-primary" title="Export as SVG">🖼️ Export SVG</button>
+            <button id="btn-export-png" class="btn btn-primary" title="Export as PNG">🖼️ Export PNG</button>
+        </div>
+    </header>
+
+    <main class="editor-container">
+        <div class="pane pane-history" id="pane-history">
+            <div class="pane-header">
+                <span class="pane-title">History</span>
+                <button id="btn-new-diagram" class="btn btn-icon" title="New Diagram">➕ New</button>
+            </div>
+            <div class="history-list" id="history-list">
+                <!-- History items will be populated here -->
+            </div>
+        </div>
+        <div class="splitter" id="splitter-history"></div>
+        <div class="pane pane-editor" id="pane-editor">
+            <div class="pane-header">
+                <span class="pane-title">Mermaid Code</span>
+                <input type="text" id="diagram-title" class="diagram-title-input" placeholder="Untitled Diagram"
+                    spellcheck="false">
+                <button id="btn-copy-code" class="btn btn-icon" title="Copy code to clipboard">📄 Copy</button>
+            </div>
+            <textarea id="editor" spellcheck="false" placeholder="Enter Mermaid code here...">graph TD
+    A[Start] --> B{Is it working?}
+    B -- Yes --> C[Great!]
+    B -- No --> D[Fix it]
+    D --> B</textarea>
+        </div>
+        <div class="splitter" id="splitter-1"></div>
+        <div class="pane pane-preview">
+            <div class="pane-header">
+                <span class="pane-title">Preview</span>
+                <button id="btn-copy-image" class="btn btn-icon" title="Copy image to clipboard">📋 Copy Image</button>
+            </div>
+            <div id="preview-container">
+                <div id="preview" class="mermaid"></div>
+            </div>
+            <div id="error-message" class="error-toast hidden"></div>
+            <div id="toast" class="toast hidden">Copied successfully!</div>
+        </div>
+        <div class="splitter" id="splitter-2"></div>
+        <div class="pane pane-syntax hidden" id="pane-syntax">
+            <div class="pane-header">
+                <span class="pane-title">Syntax Reference</span>
+                <button id="btn-close-syntax" class="btn btn-icon" title="Close reference">✖</button>
+            </div>
+            <div class="syntax-content" id="syntax-content">
+                <!-- Syntax definition will be loaded here -->
+            </div>
+        </div>
+    </main>
+
+    <!-- Load local mermaid.js -->
+    <script src="lib/mermaid.min.js"></script>
+    <script src="app.js"></script>
+</body>
+
+</html>
